@@ -1,0 +1,79 @@
+
+//PRESION A o s PARA CAMBIAR LA FIGURA
+
+float[] x= new float[400];
+float[] y= new float[400];
+float[] dx= new float[400];
+float[] dy= new float[400];
+
+float delta;
+float gama;
+void setup()
+{
+ size(400,420,P3D);
+ for(int i=0; i<400;i++){
+  x[i] = 200;
+  y[i] = 200;
+  dx[i] = 2;
+  dy[i] = 1;
+ }
+}
+
+void draw ()
+{
+ 
+ambientLight(0,0,255);
+directionalLight(0, 255, 0, 0, -1, 0);
+spotLight(255, 0, 0, width/2, height/2, 400, 0, 0, -1, PI/4, 2);
+
+  background(125);
+  strokeWeight(2);
+ stroke(200);  
+ 
+   
+ for( int i=0; i<1; i++)
+ {
+    if(x[i]>350){
+     dx[i]=dx[i]*-1;
+      fill(255,0,0);
+   
+    }
+    if(x[i]<50){
+     dx[i]=dx[i]*-1;
+      fill(0,255,0);
+   
+    }
+     if(y[i]>350){
+     dy[i]=dy[i]*-1;
+      fill(0,0,255);
+   
+    }
+     if(y[i]<50){
+     dy[i]=dy[i]*-1;
+      fill(255,255,0);
+   
+     }
+  x[i] += dx[i];
+    y[i] += dy[i];
+     delta+=0.1;
+   gama+=0.1;
+    switch(key){
+      case 'a':
+    translate(x[i],y[i]);
+    rotateX(delta);
+   rotateY(noise(1,3)*TWO_PI);
+    rotateZ(noise(1,3)*TWO_PI);
+    sphere(gama);
+    break;
+    
+    case 's':
+   
+    translate(x[i],y[i]);
+     rotateX(delta);
+   rotateY(noise(1,3)*TWO_PI);
+    rotateZ(noise(1,3)*TWO_PI);
+    box(gama,gama,gama);
+    break;
+    }
+ }
+}
